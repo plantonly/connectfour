@@ -23,6 +23,14 @@ Controller.prototype = {
     //change - put EventListener on
     $('body').on("click","canvas", this.playerTurn.bind(this))
   },
+  countDownTimer: function(i, callback) {
+    callback = callback || function(){};
+      if(int) {clearInterval(int)}
+      var int = setInterval(function() {
+      document.querySelector(".timerDiv").innerHTML = i;
+      i-- || (clearInterval(int), callback());
+    }, 1000);
+  },
 
   //current player instead of player1 or player2
   //switches player everytime there's a successful click
@@ -34,10 +42,17 @@ Controller.prototype = {
     else {
       var col = parseInt($(e.target).attr("id"))
       var row = this.board.makeMove(this.currentPlayer, col)
+      $(".timerDiv").remove();
+      $(".canvasBoard").append('<div class="timerDiv"></div>')
+      this.countDownTimer(10, function(){
+      })
       if (row != -1 ){
         this.view.placePiece(col, row, this.currentPlayer)
         if (this.board.checkWin(col, row)){
+
           this.won = true
+          $("H1").text("YOU WIN")
+
         }
         this.currentPlayer *= -1
       }

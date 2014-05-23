@@ -108,7 +108,6 @@ ConnectFour.prototype = {
   },
   checkWin: function(col, row){
     if ( this.checkCol(col) || this.checkRow(col, row) || this.checkDiag(col,row) ) {
-      alert("WIN")
       return true
     }
   }

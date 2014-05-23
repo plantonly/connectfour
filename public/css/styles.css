@@ -1,6 +1,30 @@
 .col {
   border:3px solid black;
-  margin:0;
+  /*margin: 0 auto;*/
   float:left;
-  background-color: yellow;
+  background-image:url('../images/bricks.jpg');
+  background-size: cover;
+}
+
+.canvasBoard {
+ margin: 0 auto;
+ padding-left: 25%;
+ padding-top: 25px;
+}
+
+.timerDiv {
+  text-align: center;
+  padding-top: 10px;
+  float: right;
+  margin-right: 10%;
+  background-color: black;
+  width: 100px;
+  height: 100px;
+  font-size: 50px;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  color: red;
 }
