@@ -30,6 +30,6 @@ ConnectFour = function() {
 
 ConnectFour.prototype = {
   makeMove: function(player, column) {
-    this.board[column].makeMove(player)
+    return this.board[column].makeMove(player)
   }
 }
