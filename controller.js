@@ -12,6 +12,8 @@ Controller.prototype = {
 
   bindListeners: function() {
 
+
+
     // column = this.view.ColumnClick();
     // column.on("click", this.---.bind(this), false);
 
