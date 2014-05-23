@@ -1,7 +1,8 @@
-function View(){
+View = function() {
+
 }
 
-View.prototype({
+View.prototype = {
   makeBoard: function(){
     $('.col').each(function(){
       if (this.getContext){
@@ -35,4 +36,4 @@ View.prototype({
     ctx.fill()
   }
 
-})
+}
