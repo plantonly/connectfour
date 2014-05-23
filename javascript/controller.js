@@ -34,14 +34,6 @@ Controller.prototype = {
       // this.model.didsomeonewin
       this.currentPlayer *= -1
     }
-
-    // if(this.player1.turn === true) {
-    //   this.player2.turn === false
-    // }
-    // else {
-    //   this.player1.turn === false
-    //   this.player2.turn === true
-    // }
   }
 }
 

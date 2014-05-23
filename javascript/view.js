@@ -27,7 +27,6 @@ View.prototype = {
     ctx.arc(50,row*100-50,45,0,2*Math.PI)
     ctx.lineWidth=6
     ctx.stroke()
-    var imageObj = new Image()
     if (player == 1) {
     ctx.fillStyle="#FF0000"
     }
