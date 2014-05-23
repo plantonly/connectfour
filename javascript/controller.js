@@ -1,58 +1,52 @@
 $(document).ready(function() {
   var view = new View();
-  var board = new Board();
-  var player1 = new Player("Player 1", "red");
-  var player2 = new Player("Player 2", "black");
+  var board = new ConnectFour();
   var turn = false;
-  var controller = new Controller(view, board, player1, player2);
+  var controller = new Controller(view, board);
+  controller.initialize()
   controller.bindListeners();
+
 })
 
-Controller.prototype = {
-
-  bindListeners: function() {
-
-    column1 = this.view.ColumnClick();
-    column1.on("click", this.pieceDown.bind(this), false);
-    column2 = this.view.ColumnClick();
-    column2.on("click", this.pieceDown.bind(this), false);
-    column3 = this.view.ColumnClick();
-    column3.on("click", this.pieceDown.bind(this), false);
-    column4 = this.view.ColumnClick();
-    column4.on("click", this.pieceDown.bind(this), false);
-    column5 = this.view.ColumnClick();
-    column5.on("click", this.pieceDown.bind(this), false);
-    column6 = this.view.ColumnClick();
-    column6.on("click", this.pieceDown.bind(this), false);
-    column7 = this.view.ColumnClick();
-    column7.on("click", this.pieceDown.bind(this), false);
-
-  },
-
-  playerTurn: function(player1, player2){
-    if(this.player1.turn === true) {
-      this.player2.turn === false}
-    else {
-      this.player1.turn === false
-      this.player2.turn === true
-      }
-      // playerModel
-      // boardModel
-      //player state: true or false
-      //if one is true, the other is false and vice versa
-    }
-  },
-
-  timer: function() {
-    var move = this.setInterval(forfeitMove, 10000)
-  },
-
-  gameWon: function(){
-
+Controller = function(view, board) {
+  this.view = view
+  this.board = board
+  this.currentPlayer = 1
+  this.initialize = function(){
+    this.view.makeBoard()
   }
-
-
 }
+
+Controller.prototype = {
+  bindListeners: function() {
+    //change - put EventListener on
+    $('body').on("click","canvas", this.playerTurn.bind(this))
+  },
+
+  //current player instead of player1 or player2
+  //switches player everytime there's a successful click
+
+  playerTurn: function(e){
+    var col = parseInt($(e.target).attr("id"))
+    var row = this.board.makeMove(this.currentPlayer, col)
+    if (row != -1 ){
+      this.view.placePiece(col, row, this.currentPlayer)
+      // this.model.didsomeonewin
+      this.currentPlayer *= -1
+    }
+
+    // if(this.player1.turn === true) {
+    //   this.player2.turn === false
+    // }
+    // else {
+    //   this.player1.turn === false
+    //   this.player2.turn === true
+    // }
+  }
+}
+
+
+
 
 // 1. odd/ even clicks - create an algorithm that listens for the click and adds to the total clicks variable. (looks complicated but whatever)
 // 2. player active: (boolean) -- true or false (seems easier)
