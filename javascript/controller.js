@@ -9,6 +9,7 @@ $(document).ready(function() {
 })
 
 Controller = function(view, board) {
+  this.won = false
   this.view = view
   this.board = board
   this.currentPlayer = 1
@@ -27,21 +28,20 @@ Controller.prototype = {
   //switches player everytime there's a successful click
 
   playerTurn: function(e){
-    var col = parseInt($(e.target).attr("id"))
-    var row = this.board.makeMove(this.currentPlayer, col)
-    if (row != -1 ){
-      this.view.placePiece(col, row, this.currentPlayer)
-      // this.model.didsomeonewin
-      this.currentPlayer *= -1
+    if (this.won){
+      return 0
     }
-
-    // if(this.player1.turn === true) {
-    //   this.player2.turn === false
-    // }
-    // else {
-    //   this.player1.turn === false
-    //   this.player2.turn === true
-    // }
+    else {
+      var col = parseInt($(e.target).attr("id"))
+      var row = this.board.makeMove(this.currentPlayer, col)
+      if (row != -1 ){
+        this.view.placePiece(col, row, this.currentPlayer)
+        if (this.board.checkWin(col, row)){
+          this.won = true
+        }
+        this.currentPlayer *= -1
+      }
+    }
   }
 }
 
